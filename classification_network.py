@@ -10,12 +10,12 @@ import seaborn as sns
 
 
 # Constants
-IMG_SIZE = 48
+IMG_SIZE = 64
 NUM_CHANNELS = 3         # Zmienione z 1 (grayscale) na 3 (RGB)
 NUM_CLASSES = 2          # Dla 2 klas: dog i cat
 BATCH_SIZE = 64
 EPOCHS = 100
-LEARN_RATE = 0.002
+LEARN_RATE = 0.000005
 
 def load_dataset(base_path):
     print("Loading dataset from:", base_path)
@@ -159,7 +159,7 @@ def train_model(db_path, params=None):
     print("\nCreating model...")
     model = create_model()
     model.compile(
-        optimizer=tf.keras.optimizers.AdamW(learning_rate=0.05, weight_decay=0.004),
+        optimizer=tf.keras.optimizers.AdamW(learning_rate=0.004, weight_decay=0.004),
         loss='categorical_crossentropy',
         metrics=['accuracy']
     )
@@ -282,7 +282,7 @@ def plot_confusion_matrix(model, test_images, test_labels):
 def test_sample_images(model_path, test_dir, samples_per_class=10):
     model = tf.keras.models.load_model(model_path)
     
-    for animal in ['dog', 'cat']:
+    for animal in ['dogs', 'cats']:
         path = os.path.join(test_dir, animal)
         images_list = os.listdir(path)[:samples_per_class]
         
@@ -318,6 +318,7 @@ def test_sample_images(model_path, test_dir, samples_per_class=10):
 
 
 if __name__ == "__main__":
+
     # Upewnij się, że folder bazowy wskazuje na poprawną ścieżkę (np. './animals')
     db_path = r'C:\Users\julia\Desktop\sieci\zwierzeta'
     model, history = train_model(db_path)
