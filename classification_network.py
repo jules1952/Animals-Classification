@@ -320,7 +320,7 @@ def test_sample_images(model_path, test_dir, samples_per_class=10):
 if __name__ == "__main__":
 
     # Upewnij się, że folder bazowy wskazuje na poprawną ścieżkę (np. './animals')
-    db_path = r'C:\Users\julia\Desktop\sieci\zwierzeta'
+    db_path = './zwierzeta'
     model, history = train_model(db_path)
 
     plot_training_history(history)
